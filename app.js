@@ -1,5 +1,5 @@
 // import file names 
-import {names} from '/names.js';
+import {names} from './names.js';
 
 function init() {
     let cards = new List();

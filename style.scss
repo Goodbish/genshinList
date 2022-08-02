@@ -1,0 +1,290 @@
+@font-face {
+    font-family: "Genshin";
+    src: url("./assets/Genshin_Impact.ttf");
+}
+
+// status colors
+$unset: transparent;
+$want: green;
+$have: blue;
+
+.main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Genshin';
+    min-height: 100vh;
+    width: 100%;
+    color: white;
+    background: rgb(46,33,172);
+    background: linear-gradient(120deg, rgba(46,33,172,1) 0%, rgba(229,76,156,1) 100%);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 30px 20px;
+    margin: 100px 60px;
+    max-width: 1320px;
+    background: rgba( 255, 255, 255, 0.5 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4.5px );
+    -webkit-backdrop-filter: blur( 4.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+    @media (max-width: 1200px) {
+        max-width: 80%;
+    }
+
+    @media (max-width: 991px) {
+        max-width: 100%;
+        padding: 30px 15px;
+        margin: 100px 30px;
+    }
+}
+
+.author {
+    position: absolute;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    bottom: 5px;
+    right: 5px;
+    border-radius: 6px;
+
+    &__link {
+        text-align: center;
+        text-decoration: underline;
+        font-size: 16px;
+    }
+}
+
+.header {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__text {
+        display: block;
+        text-align: center;
+        font-size: 48px;
+
+        @media (max-width: 576px) {
+            font-size: 32px;
+        }
+    }
+
+    &__characters {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+
+        .card {
+            max-width: 151px;
+
+            @media (max-width: 1200px) {
+                max-width: 105px;
+            }
+
+            @media (max-width: 991px) {
+                max-width: 135px;
+            }
+
+            @media (max-width: 576px) {
+                max-width: 108px;
+            }
+        }
+    }
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 16px;
+
+    @media (max-width: 991px) {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    @media (max-width: 576px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 425px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    position: relative;
+    width: 100%;
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__check {
+        position: absolute;
+        right: 0px;
+        bottom: -10px;
+        width: 20%;
+        height: 20%;
+        border-radius: 50%;
+        outline: 2px solid white;
+        box-shadow: inset 0px 0px 10px 5px #66129471,
+             0px 0px 10px 5px #66129471;
+
+        &::before {
+            content: '';
+            position: relative;          
+            display: block;
+            border-radius: 50%;
+            height: 0%;
+            width: 0%;
+            margin: auto;
+            background: transparent;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: 0.4s;
+        }
+    }
+
+    &[data-status="1"] {
+        .card__check {
+            &::before {
+                height: 100%;
+                width: 100%;
+                background: $have;
+            }
+        }
+    }
+
+    &[data-status="2"] {
+        .card__check {
+            &::before {
+                height: 100%;
+                width: 100%;
+                background: $want;
+            }
+        }
+    }
+}
+
+.info {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding-top: 40px;
+
+    @media (max-width: 576px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+    
+    &__rank {
+        display: flex;
+        align-items: center;
+
+        &-info {
+            font-family: 'Genshin';
+            background: none;
+            padding: 20px;
+            outline: 2px solid white;
+            border: none;
+            width: 110px;
+            color: white;
+            font-size: 48px;
+            height: 70px;
+            border-radius: 12px;
+            margin-right: 24px;
+            box-shadow: inset 0px 0px 10px 5px #66129471,
+             0px 0px 10px 5px #66129471;
+
+            @media (max-width: 576px) {
+                width: 92px;
+                font-size: 36px;
+                height: 60px;
+                margin-right: 16px;
+                box-shadow: inset 0px 0px 7px 4px #66129471, 0px 0px 7px 4px #66129471;
+            }
+        }
+
+        &-text {
+            font-size: 24px;
+        }
+    }
+
+    &__legend {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @media (max-width: 576px) {
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+        }
+
+        &-item {
+            display: flex;
+            align-items: center;
+
+            & + & {
+                margin-top: 12px;
+
+                @media (max-width: 576px) {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0px 0px 10px 5px #66129471;
+            margin-right: 16px;
+
+            @media (max-width: 576px) {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+}
+
+.circle {
+    &--green {
+        background: green;
+    }
+
+    &--blue {
+        background: blue;;
+    }
+}
+
+
+// hide input number arrows
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+// /hide input number arrows

@@ -1,0 +1,370 @@
+@font-face {
+  font-family: "Genshin";
+  src: url("./assets/Genshin_Impact.ttf");
+}
+
+.main {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: 'Genshin';
+  min-height: 100vh;
+  width: 100%;
+  color: white;
+  background: #2e21ac;
+  background: -webkit-linear-gradient(330deg, #2e21ac 0%, #e54c9c 100%);
+  background: -o-linear-gradient(330deg, #2e21ac 0%, #e54c9c 100%);
+  background: linear-gradient(120deg, #2e21ac 0%, #e54c9c 100%);
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  padding: 30px 20px;
+  margin: 100px 60px;
+  max-width: 1320px;
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 991px) {
+  .container {
+    max-width: 100%;
+    padding: 30px 15px;
+    margin: 100px 30px;
+  }
+}
+
+.author {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 6px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  bottom: 5px;
+  right: 5px;
+  border-radius: 6px;
+}
+
+.author__link {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 16px;
+}
+
+.header {
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header__text {
+  display: block;
+  text-align: center;
+  font-size: 48px;
+}
+
+@media (max-width: 576px) {
+  .header__text {
+    font-size: 32px;
+  }
+}
+
+.header__characters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 16px;
+}
+
+.header__characters .card {
+  max-width: 151px;
+}
+
+@media (max-width: 1200px) {
+  .header__characters .card {
+    max-width: 105px;
+  }
+}
+
+@media (max-width: 991px) {
+  .header__characters .card {
+    max-width: 135px;
+  }
+}
+
+@media (max-width: 576px) {
+  .header__characters .card {
+    max-width: 108px;
+  }
+}
+
+.list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[8];
+      grid-template-columns: repeat(8, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 991px) {
+  .list {
+    -ms-grid-columns: (1fr)[6];
+        grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .list {
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 425px) {
+  .list {
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  width: 100%;
+}
+
+.card__image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card__check {
+  position: absolute;
+  right: 0px;
+  bottom: -10px;
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  outline: 2px solid white;
+  -webkit-box-shadow: inset 0px 0px 10px 5px #66129471, 0px 0px 10px 5px #66129471;
+          box-shadow: inset 0px 0px 10px 5px #66129471, 0px 0px 10px 5px #66129471;
+}
+
+.card__check::before {
+  content: '';
+  position: relative;
+  display: block;
+  border-radius: 50%;
+  height: 0%;
+  width: 0%;
+  margin: auto;
+  background: transparent;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.card[data-status="1"] .card__check::before {
+  height: 100%;
+  width: 100%;
+  background: blue;
+}
+
+.card[data-status="2"] .card__check::before {
+  height: 100%;
+  width: 100%;
+  background: green;
+}
+
+.info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding-top: 40px;
+}
+
+@media (max-width: 576px) {
+  .info {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 16px;
+  }
+}
+
+.info__rank {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.info__rank-info {
+  font-family: 'Genshin';
+  background: none;
+  padding: 20px;
+  outline: 2px solid white;
+  border: none;
+  width: 110px;
+  color: white;
+  font-size: 48px;
+  height: 70px;
+  border-radius: 12px;
+  margin-right: 24px;
+  -webkit-box-shadow: inset 0px 0px 10px 5px #66129471, 0px 0px 10px 5px #66129471;
+          box-shadow: inset 0px 0px 10px 5px #66129471, 0px 0px 10px 5px #66129471;
+}
+
+@media (max-width: 576px) {
+  .info__rank-info {
+    width: 92px;
+    font-size: 36px;
+    height: 60px;
+    margin-right: 16px;
+    -webkit-box-shadow: inset 0px 0px 7px 4px #66129471, 0px 0px 7px 4px #66129471;
+            box-shadow: inset 0px 0px 7px 4px #66129471, 0px 0px 7px 4px #66129471;
+  }
+}
+
+.info__rank-text {
+  font-size: 24px;
+}
+
+.info__legend {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (max-width: 576px) {
+  .info__legend {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 16px;
+  }
+}
+
+.info__legend-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.info__legend-item + .info__legend-item {
+  margin-top: 12px;
+}
+
+@media (max-width: 576px) {
+  .info__legend-item + .info__legend-item {
+    margin-top: 0;
+  }
+}
+
+.info__legend-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid white;
+  -webkit-box-shadow: 0px 0px 10px 5px #66129471;
+          box-shadow: 0px 0px 10px 5px #66129471;
+  margin-right: 16px;
+}
+
+@media (max-width: 576px) {
+  .info__legend-circle {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.circle--green {
+  background: green;
+}
+
+.circle--blue {
+  background: blue;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/*# sourceMappingURL=style.css.map */

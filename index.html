@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/reset-css/reset.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Genshin list</title>
+</head>
+<body>
+    <main class="main">
+        <div class="container">
+            <div class="header">
+                <div class="header__container">
+                    <span class="header__text">Чек-лист персонажей</span>
+                </div>
+                <div class="info">
+                    <div class="info__rank">
+                        <input type="number" pattern="[0-9]{2}" min="1" max="60" class="info__rank-info">
+                        <div class="info__rank-text">Ранг</div>
+                    </div>
+
+                    <div class="info__legend">
+                        <div class="info__legend-item">
+                            <div class="info__legend-circle circle--blue"></div>
+                            <div class="info__legend-text">У меня есть</div>
+                        </div>
+                        <div class="info__legend-item">
+                            <div class="info__legend-circle circle--green"></div>
+                            <div class="info__legend-text">Я хочу</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header__characters">
+
+                </div>
+            </div>
+
+            <div class="list">
+
+            </div>
+
+            
+        </div>
+
+        <div class="author">
+            <img src="./assets/telegram.svg" alt="" class="author__link-icon">
+            <a href="https://t.me/Bannikov_Daniil" target="_blank" class="author__link">Created by Daniil Bannikov</a>
+        </div>
+    </main>
+
+    <script type="module" src="names.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>

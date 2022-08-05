@@ -6,27 +6,31 @@ function init() {
     cards.makeObject();
     cards.renderAllCards();
     cards.attachStatusEvent();
+    console.log(cardList);
 }
 
 let finalObject = {
     0: {
-        id: 0,
-        image: 'UI_AvatarIcon_PlayerBoy.png'
+        image: 'UI_AvatarIcon_PlayerBoy.png',
+        status: 0
     },
     1: {
-        id: 1,
-        image: 'UI_AvatarIcon_PlayerGirl.png'
+        image: 'UI_AvatarIcon_PlayerGirl.png',
+        status: 0
     }
 };
+
+let cardList = [];
 
 const listElement = document.querySelector('.list');
 const mainCharactersElement = document.querySelector('.header__characters');
 
 class Card {
-    constructor(image, id) {
+    constructor(image, id, status = 0) {
         this.image = image,
+        this.status = status,
         this.id = id,
-        this.cardHTML = `<div class="card" data-id="${this.id}" data-status="0">
+        this.cardHTML = `<div class="card" data-id="${this.id}" data-status="${this.status}">
             <img src="./assets/${this.image}" alt="" class="card__image">
             <div class="card__check circle"></div>
         </div>`
@@ -44,17 +48,17 @@ class Card {
 class List {
     constructor() {
         this.statusValues = {
-            unset: '0',
-            have: '1',
-            want: '2'
+            unset: 0,
+            have: 1,
+            want: 2
         };
     }
 
     makeObject() {
         names.forEach((image, i) => {
             finalObject[i + 2] = {
-                id: i + 2,
-                image: image
+                image: image,
+                status: 0
             }
         })
     }
@@ -62,8 +66,9 @@ class List {
     renderAllCards() {
         for (let key in finalObject) {
             let cardImage = finalObject[key].image;
-            let cardId = finalObject[key].id;
+            let cardId = key;
             let newCard = new Card(cardImage, cardId);
+            cardList.push(newCard);
             // id 0 and 1 for main characters
             if (cardId < 2) {
                 newCard.renderMainCharacters();
@@ -89,9 +94,42 @@ class List {
                 let lastStatusElement = Number(statuses[lastKey]);
                 currentStatus !== lastStatusElement ? currentStatus++ : currentStatus = 0;
                 card.setAttribute('data-status', currentStatus);
+
+                // change status in main object
+                let dataId = Number(card.getAttribute('data-id'));
+                finalObject[dataId].status = currentStatus;
+                console.log(finalObject);
             })
         })
     }
 }
 
 init();
+
+const copyButton = document.querySelector('.copy__button');
+const copyCircle = document.querySelector('.copy__circle');
+
+function makeLinkText() {
+    let newResult = {};
+    for (let key in finalObject) {
+        if (!finalObject[key].status == 0) {
+            newResult[Number(key)] = {
+                s : finalObject[key].status
+            }
+        }
+    }
+    newResult = JSON.stringify(newResult);
+    newResult = newResult.replaceAll('},','p');
+    newResult = newResult.replaceAll(/[{}":]/gm,'');
+    return newResult
+}
+
+copyCircle.addEventListener('click', function() {
+    copyButton.querySelector('.copy__body').classList.toggle('copy__body--show');
+    // let newLink = window.location.href + `?data=${makeLinkText()}`;
+    window.history.pushState("", "", `/?data=${makeLinkText()}`);
+})
+
+
+
+// Copy functional

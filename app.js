@@ -125,6 +125,13 @@ function makeLinkText() {
 }
 
 copyCircle.addEventListener('click', function() {
+    if (!copyCircle.classList.contains('copy__circle--active')) {
+        copyCircle.classList.toggle('copy__circle--active');
+    } else {
+        setTimeout(function() {
+            copyCircle.classList.toggle('copy__circle--active');
+        }, 500)
+    }
     copyButton.querySelector('.copy__body').classList.toggle('copy__body--show');
     // let newLink = window.location.href + `?data=${makeLinkText()}`;
     window.history.pushState("", "", `/?data=${makeLinkText()}`);

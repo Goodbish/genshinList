@@ -367,6 +367,15 @@
   height: 100%;
 }
 
+@media (max-width: 1700px) {
+  .copy {
+    right: 10px;
+    -webkit-transform: inherit;
+        -ms-transform: inherit;
+            transform: inherit;
+  }
+}
+
 .copy__button {
   position: -webkit-sticky;
   position: sticky;
@@ -381,10 +390,17 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-color: #0057da;
+  background-color: rgba(0, 87, 218, 0.5);
   z-index: 2;
   overflow: hidden;
   cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.copy__circle--active {
+  background-color: #0057da;
 }
 
 .copy__icon {

@@ -280,6 +280,11 @@ $have: blue;
     transform: translateX(100%);
     height: 100%;
 
+    @media (max-width: 1700px) {
+        right: 10px;
+        transform: inherit;
+    }
+
     &__button {
         position: sticky;
         top: 50px;
@@ -293,10 +298,15 @@ $have: blue;
         width: 80px;
         height: 80px;
         border-radius: 50%;
-        background-color: rgba(0, 87, 218, 1);
+        background-color: rgba(0, 87, 218, 0.5);
         z-index: 2;
         overflow: hidden;
         cursor: pointer;
+        transition: all 0.3s ease;
+
+        &--active {
+            background-color: rgba(0, 87, 218, 1);
+        }
     }
 
     &__icon {
@@ -305,8 +315,6 @@ $have: blue;
         top: 50%;
         transform: translate(-50%, -50%);
     }
-
-    
 
     &__body {
         padding: 12px 60px 12px 20px;

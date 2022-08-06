@@ -52,6 +52,7 @@ class List {
             have: 1,
             want: 2
         };
+        this.dataUrl = {}
     }
 
     makeObject() {
@@ -61,13 +62,33 @@ class List {
                 status: 0
             }
         })
+
+        if (this.getUrlData() !== undefined) {
+            // 0s2p2s1p3s2p4s1p5s1p6s2p8s1p10s1p11s1p12s1p13s1
+            let urlData = this.getUrlData();
+            urlData = urlData.split('p');
+            urlData.forEach(element => {
+                let elementId = element.split('s')[0];
+                let elementStatus = element.split('s')[1];
+                finalObject[elementId].status = elementStatus;
+            })
+
+            console.log(finalObject);
+        }
+    }
+
+    getUrlData() {
+        let urlText = window.location.href;
+        let urlData = urlText.split('?data=')[1];
+        return urlData
     }
 
     renderAllCards() {
         for (let key in finalObject) {
             let cardImage = finalObject[key].image;
             let cardId = key;
-            let newCard = new Card(cardImage, cardId);
+            let cardStatus = finalObject[key].status;
+            let newCard = new Card(cardImage, cardId, cardStatus);
             cardList.push(newCard);
             // id 0 and 1 for main characters
             if (cardId < 2) {
@@ -108,6 +129,8 @@ init();
 
 const copyButton = document.querySelector('.copy__button');
 const copyCircle = document.querySelector('.copy__circle');
+const copyText = document.querySelector('.copy__body-text');
+const copyInput = document.querySelector('.copy__input');
 
 function makeLinkText() {
     let newResult = {};
@@ -124,6 +147,7 @@ function makeLinkText() {
     return newResult
 }
 
+
 copyCircle.addEventListener('click', function() {
     if (!copyCircle.classList.contains('copy__circle--active')) {
         copyCircle.classList.toggle('copy__circle--active');
@@ -133,10 +157,17 @@ copyCircle.addEventListener('click', function() {
         }, 500)
     }
     copyButton.querySelector('.copy__body').classList.toggle('copy__body--show');
-    // let newLink = window.location.href + `?data=${makeLinkText()}`;
+    let newLink = window.location.href + `?data=${makeLinkText()}`;
+    navigator.clipboard.writeText(newLink).then(function() {
+        copyText.classList.add('copy__body-text--success');
+        copyText.classList.remove('copy__body-text--fail');
+        copyText.innerText = 'Успешно скопировано в буфер обмена';
+    }, function(err) {
+        copyText.classList.add('copy__body-text--fail');
+        copyText.classList.remove('copy__body-text--success');
+        copyText.innerText = 'Что-то пошло не так';
+    });
+    copyInput.value = newLink;
+    copyInput.select();
     window.history.pushState("", "", `/?data=${makeLinkText()}`);
 })
-
-
-
-// Copy functional

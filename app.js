@@ -62,7 +62,7 @@ class List {
             }
         })
 
-        if (this.getUrlData() !== undefined) {
+        if (this.getUrlData()) {
             // 0s2p2s1p3s2p4s1p5s1p6s2p8s1p10s1p11s1p12s1p13s1
             let urlData = this.getUrlData();
             urlData = urlData.split('p');
@@ -78,9 +78,12 @@ class List {
     getUrlData() {
         let urlText = window.location.href;
         let urlData = urlText.split('?data=')[1];
-        let statusData = urlData.split('&rank=')[0]
-        let rankData = urlData.split('&rank=')[1];
-        this.setRank(rankData);
+        let statusData = ''
+        if (urlData) {
+            statusData = urlData.split('&rank=')[0]
+            let rankData = urlData.split('&rank=')[1];
+            this.setRank(rankData);
+        }
         return statusData
     }
 

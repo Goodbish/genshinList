@@ -78,7 +78,15 @@ class List {
     getUrlData() {
         let urlText = window.location.href;
         let urlData = urlText.split('?data=')[1];
-        return urlData
+        let statusData = urlData.split('&rank=')[0]
+        let rankData = urlData.split('&rank=')[1];
+        this.setRank(rankData);
+        return statusData
+    }
+
+    setRank(rank) {
+        let rankElement = document.querySelector('.info__rank-info');
+        rank ? rankElement.value = rank : rankElement.value = 1;
     }
 
     renderAllCards() {
@@ -128,6 +136,7 @@ const copyButton = document.querySelector('.copy__button');
 const copyCircle = document.querySelector('.copy__circle');
 const copyText = document.querySelector('.copy__body-text');
 const copyInput = document.querySelector('.copy__input');
+const rankInfo = document.querySelector('.info__rank-info');
 
 function makeLinkText() {
     let newResult = {};
@@ -154,7 +163,10 @@ copyCircle.addEventListener('click', function() {
         }, 500)
     }
     copyButton.querySelector('.copy__body').classList.toggle('copy__body--show');
-    let newLink = window.location.href + `?data=${makeLinkText()}`;
+    let currentUrl = window.location.href;
+    currentUrl = currentUrl.substring(0, currentUrl.indexOf('?data='));
+    let rank = rankInfo.value;
+    let newLink = window.location.href + `?data=${makeLinkText()}&rank=${rank}`;
     navigator.clipboard.writeText(newLink).then(function() {
         copyText.classList.add('copy__body-text--success');
         copyText.classList.remove('copy__body-text--fail');
@@ -166,5 +178,5 @@ copyCircle.addEventListener('click', function() {
     });
     copyInput.value = newLink;
     copyInput.select();
-    window.history.pushState("", "", `/?data=${makeLinkText()}`);
+    window.history.pushState("", "", `${window.location.pathname}?data=${makeLinkText()}&rank=${rank}`);
 })

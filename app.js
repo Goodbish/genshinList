@@ -1,4 +1,4 @@
-// import file names 
+// in names there is list of images
 import {names} from './names.js';
 
 function init() {
@@ -6,7 +6,6 @@ function init() {
     cards.makeObject();
     cards.renderAllCards();
     cards.attachStatusEvent();
-    console.log(cardList);
 }
 
 let finalObject = {
@@ -73,7 +72,6 @@ class List {
                 finalObject[elementId].status = elementStatus;
             })
 
-            console.log(finalObject);
         }
     }
 
@@ -119,7 +117,6 @@ class List {
                 // change status in main object
                 let dataId = Number(card.getAttribute('data-id'));
                 finalObject[dataId].status = currentStatus;
-                console.log(finalObject);
             })
         })
     }
